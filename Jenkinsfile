@@ -1,7 +1,7 @@
 pipeline {
   agent any 
-  stages {
-    try {
+  try {
+    stages {
       stage('test'){
           echo "test stage .... from SCM ..."
           
@@ -38,9 +38,10 @@ pipeline {
         echo "prod-deploy stage ...."
       }
 
-    } catch (Exception e) {
-      echo "Error: ${e.message}"
+    
     }
+  } catch (Exception e) {
+    echo "Error: ${e.message}"
   }
 
   post {
