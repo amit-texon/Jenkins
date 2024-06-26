@@ -3,7 +3,7 @@ node {
     try {
         
         stage('test') {
-            echo "test stage"
+            echo "test stage .... from SCM ..."
         }
         
         stage('build') {
@@ -30,7 +30,7 @@ node {
         }
         if (env.BRANCH_NAME == 'dfasdfasdf') {
             stage('staging') {
-                echo "stagging stage"
+                echo "stagging stage ...."
             }
         }
         
