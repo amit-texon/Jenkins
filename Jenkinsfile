@@ -5,8 +5,8 @@ pipeline {
 
   parameters {
         string(name: 'NAME', description: 'Please tell me your name')
+        string(name: 'WEEKDAY', description: 'Please tell day of week')
         choice(name: 'GENDER', choices: ['Male', 'Female'], description: 'Choose Gender')
-        string(name: 'DAYOFWEEK', description: 'Please tell day of week')
     }
   
   stages {
@@ -14,7 +14,7 @@ pipeline {
       steps {
         echo "test stage .... from SCM ..."
         
-        helloWorld(name:"${params.NAME}", dayOfWeek:"${params.DAYOFWEEK}")
+        helloWorld(name:"${params.NAME}", dayOfWeek:"${params.WEEKDAY}")
 
         
         script {
