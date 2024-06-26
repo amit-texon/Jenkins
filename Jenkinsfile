@@ -1,65 +1,57 @@
-node {
-    
+pipeline {
+  agent any 
+  stages {
     try {
-        
-        stage('test') {
-            echo "test stage .... from SCM ..."
+      stage('test'){
+          echo "test stage .... from SCM ..."
+          
+      }
+
+      stage('build') {
+        echo "build stage" 
+        try { 
+            echo "try block changes...." 
+            
+        } catch (e) {
+          echo "Error: ${e.message}"
         }
-        
-        stage('build') {
-             echo "build stage"
-             try {
-                 echo "try block changes...."
-             } catch (e) {
-                 echo "Error: ${e.message}"
-             }
+      }
+
+      stage('Parallel Stages') {
+        parallel(
+            "first": {echo "first ..."}, 
+            "second": {echo "second ..."}, 
+            "third": {echo "third ..."})
+      }
+      if (env.BRANCH_NAME == 'dfasdfasdf') {
+        stage('staging') {
+          echo "stagging stage ...."
         }
-        
-        stage('Parallel Stages') {
-            parallel(
-                "first": {
-                    echo "first ..."
-                },
-                "second": {
-                    echo "second ..."
-                },
-                "third": {
-                    echo "third ..."
-                }
-            )
-        }
-        if (env.BRANCH_NAME == 'dfasdfasdf') {
-            stage('staging') {
-                echo "stagging stage ...."
-            }
-        }
-        
-        stage('test-deploy') {
-             echo "test-deploy stage ..."
-        }
-        
-        stage('prod-deploy') {
-             echo "prod-deploy stage ...."
-        }
-        
+      }
+
+      stage('test-deploy') {
+          echo "test-deploy stage ..."
+          
+      }
+
+      stage('prod-deploy') {
+        echo "prod-deploy stage ...."
+      }
+
     } catch (Exception e) {
-        echo "Error: ${e.message}"
+      echo "Error: ${e.message}"
     }
-    
-    
-   
-   /* 
-    post {
-        always {
-            
-        }
-        success {
-            
-        }
-        failure {
-            
-        }
+  }
+
+  post {
+    always {
+        echo "always ..."
     }
-    */
-    
+    success {
+        echo "success ..."
+    }
+    failure {
+        echo "failure ..."
+    }
+  }
 }
