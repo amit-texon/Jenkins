@@ -1,5 +1,6 @@
 pipeline {
-  agent any stages {
+  agent any 
+  stages {
     stage('test') {
       steps {
         echo "test stage .... from SCM ..."
@@ -14,21 +15,7 @@ pipeline {
       }
     }
 
-    stage('Parallel Stages') {
-      steps {
-        parallel("first"
-                 : {echo "first ..."}, "second"
-                 : {echo "second ..."}, "third"
-                 : {echo "third ..."})
-      }
-    }
-    if (env.BRANCH_NAME == 'dfasdfasdf') {
-      stage('staging') {
-        steps {
-          echo "stagging stage ...."
-        }
-      }
-    }
+    
 
     stage('test-deploy') {
       steps {
@@ -44,8 +31,12 @@ pipeline {
   }
 
   post {
-    always{echo "always ..."} success{echo "success ..."} failure {
+    always{echo "always ..."} 
+    changed {echo "changed "}
+    success{echo "success ..."} 
+    failure {
       echo "failure ..."
     }
+    unstable {echo "unstable"}
   }
 }
