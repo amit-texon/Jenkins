@@ -9,7 +9,7 @@ node {
         stage('build') {
              echo "build stage"
              try {
-                 echo "in try ...."
+                 echo "try block changes...."
              } catch (e) {
                  echo "Error: ${e.message}"
              }
