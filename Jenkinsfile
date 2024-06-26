@@ -1,54 +1,51 @@
 pipeline {
-  agent any 
-    stages {
-      stage('test'){
-          echo "test stage .... from SCM ..."
-          
+  agent any stages {
+    stage('test') {
+      steps {
+        echo "test stage .... from SCM ..."
       }
+    }
 
-      stage('build') {
-        echo "build stage" 
-        try { 
-            echo "try block changes...." 
-            
-        } catch (e) {
+    stage('build') {
+      steps {
+        echo "build stage" try { echo "try block changes...." } catch (e) {
           echo "Error: ${e.message}"
         }
       }
+    }
 
-      stage('Parallel Stages') {
-        parallel(
-            "first": {echo "first ..."}, 
-            "second": {echo "second ..."}, 
-            "third": {echo "third ..."})
+    stage('Parallel Stages') {
+      steps {
+        parallel("first"
+                 : {echo "first ..."}, "second"
+                 : {echo "second ..."}, "third"
+                 : {echo "third ..."})
       }
-      if (env.BRANCH_NAME == 'dfasdfasdf') {
-        stage('staging') {
+    }
+    if (env.BRANCH_NAME == 'dfasdfasdf') {
+      stage('staging') {
+        steps {
           echo "stagging stage ...."
         }
       }
+    }
 
-      stage('test-deploy') {
-          echo "test-deploy stage ..."
-          
+    stage('test-deploy') {
+      steps {
+        echo "test-deploy stage ..."
       }
+    }
 
-      stage('prod-deploy') {
+    stage('prod-deploy') {
+      steps {
         echo "prod-deploy stage ...."
       }
-
-    
     }
+  }
 
   post {
-    always {
-        echo "always ..."
-    }
-    success {
-        echo "success ..."
-    }
-    failure {
-        echo "failure ..."
+    always{echo "always ..."} success{echo "success ..."} failure {
+      echo "failure ..."
     }
   }
 }
