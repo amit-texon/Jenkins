@@ -9,9 +9,7 @@ pipeline {
 
     stage('build') {
       steps {
-        echo "build stage" try { echo "try block changes...." } catch (e) {
-          echo "Error: ${e.message}"
-        }
+        echo "build stage" 
       }
     }
 
