@@ -1,6 +1,5 @@
 pipeline {
   agent any 
-  try {
     stages {
       stage('test'){
           echo "test stage .... from SCM ..."
@@ -40,9 +39,6 @@ pipeline {
 
     
     }
-  } catch (Exception e) {
-    echo "Error: ${e.message}"
-  }
 
   post {
     always {
