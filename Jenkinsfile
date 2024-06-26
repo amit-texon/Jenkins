@@ -17,13 +17,11 @@ pipeline {
 
     stage('test-deploy') {
       steps {
-        echo "test-deploy stage ..."
-
         parallel (
-            "firstTask" : {
+            firstTask: {
                 echo  "first task ...."
             },
-            "secondTask" : {
+            secondTask: {
                 echo "second task ..."
             }
         )
