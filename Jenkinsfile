@@ -1,3 +1,5 @@
+@Library('shared-library') _
+
 pipeline {
   agent any 
 
@@ -10,7 +12,9 @@ pipeline {
     stage('test') {
       steps {
         echo "test stage .... from SCM ..."
+        helloWorld()
 
+        
         script {
                     def name = "${params.NAME}"
                     def gender = "${params.GENDER}"
