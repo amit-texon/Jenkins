@@ -22,7 +22,7 @@ pipeline {
       steps {
         echo "test stage ..."
         
-        sh 'mvn --version'
+        /*sh 'mvn --version'*/
         
         helloWorld(name:"${params.NAME}", dayOfWeek:"${params.WEEKDAY}")
   
