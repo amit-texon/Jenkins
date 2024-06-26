@@ -18,6 +18,16 @@ pipeline {
     stage('test-deploy') {
       steps {
         echo "test-deploy stage ..."
+
+        parallel (
+            "firstTask" : {
+                echo  "first task ...."
+            },
+            "secondTask" : {
+                echo "second task ..."
+            }
+        )
+
       }
     }
 
