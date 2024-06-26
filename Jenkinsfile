@@ -6,13 +6,14 @@ pipeline {
   parameters {
         string(name: 'NAME', description: 'Please tell me your name')
         choice(name: 'GENDER', choices: ['Male', 'Female'], description: 'Choose Gender')
+        string(name: 'DAYOFWEEK', description: 'Please tell day of week')
     }
   
   stages {
     stage('test') {
       steps {
         echo "test stage .... from SCM ..."
-        helloWorld()
+        helloWorld(name:"${params.NAME}", dayOfWeek:"${params.DAYOFWEEK}")
 
         
         script {
